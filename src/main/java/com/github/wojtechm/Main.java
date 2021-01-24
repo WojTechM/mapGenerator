@@ -16,11 +16,12 @@ class Main {
 
         LandformGenerator lg = new LandformGenerator();
         lg.generate(map);
-        DisplayFactory.physicalDisplay().print(map);
-
         WaterGenerator wg = new WaterGenerator();
         wg.generate(map);
         TerrainGenerator tg = new TerrainGenerator();
         tg.generate(map);
+
+//        DisplayFactory.physicalDisplay().print(map);
+        DisplayFactory.standardDisplay().print(map);
     }
 }
