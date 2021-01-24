@@ -14,7 +14,6 @@ class PhysicalDisplayTest {
             for (int x = 0; x < map.getWidth(); x++) {
                 Field field = map.fieldAtPosition(new Point(x, y)).get();
                 int metersAboveSeaLevel = 10_000 - (y * 1000) - (x * 777);
-                System.out.println(metersAboveSeaLevel);
                 field.setMetersAboveSeaLevel(metersAboveSeaLevel);
             }
         }
