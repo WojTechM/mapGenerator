@@ -9,4 +9,7 @@ public class DisplayFactory {
         return new StandardDisplay();
     }
 
+    public static Display physicalDisplay() {
+        return new PhysicalDisplay();
+    }
 }
