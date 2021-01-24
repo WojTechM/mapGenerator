@@ -6,7 +6,7 @@ package com.github.wojtechm;
 public class Field {
     private int metersAboveSeaLevel;
     private TerrainType terrainType;
-    private Point position;
+    private final Point position;
 
     public Field(Point position) {
         this.metersAboveSeaLevel = 0;

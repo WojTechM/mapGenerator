@@ -3,6 +3,6 @@ package com.github.wojtechm;
 /**
  * @author Wojciech Makieła
  */
-enum Direction {
-    NORTH, EAST, NORTH_EAST;
+public enum Direction {
+    NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST;
 }
