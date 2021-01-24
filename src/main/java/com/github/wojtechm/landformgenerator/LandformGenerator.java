@@ -9,9 +9,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Wojciech Makieła
+ * @author Mateusz Gołda
+ * @author Aleksander Jednaszewski
+ * @author Piotr Młudzik
  */
 public class LandformGenerator {
-    private static final int MAX_STEP = 100;
+    private static final int MAX_STEP = 1000;
     private final int maxHeight;
     private final int minHeight;
     private GeneratedMap map;
