@@ -8,6 +8,8 @@ import java.util.Optional;
 
 /**
  * @author Wojciech Makieła
+ * @author Piotr Młudzik
+ * @author Aleksander Jednaszewski
  */
 public class TerrainGenerator {
     private final int ICE_LEVEL = 3000;
