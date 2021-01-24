@@ -6,15 +6,16 @@ package com.github.wojtechm;
 public class Field {
     private int metersAboveSeaLevel;
     private TerrainType terrainType;
+    private Point position;
 
-    public Field(int metersAboveSeaLevel, TerrainType terrainType) {
-        this.metersAboveSeaLevel = metersAboveSeaLevel;
-        this.terrainType = terrainType;
+    public Field(Point position) {
+        this.metersAboveSeaLevel = 0;
+        this.terrainType = TerrainType.GRASSLAND;
+        this.position = position;
     }
 
-    public Field(int metersAboveSeaLevel) {
-        this.metersAboveSeaLevel = metersAboveSeaLevel;
-        this.terrainType = TerrainType.GRASSLAND;
+    public Point getPosition() {
+        return position;
     }
 
     public int getMetersAboveSeaLevel() {
