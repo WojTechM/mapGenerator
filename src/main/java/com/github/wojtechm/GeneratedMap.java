@@ -51,4 +51,11 @@ public class GeneratedMap {
                 .collect(Collectors.toList());
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

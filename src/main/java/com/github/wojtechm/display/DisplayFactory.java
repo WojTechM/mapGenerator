@@ -6,7 +6,7 @@ package com.github.wojtechm.display;
 public class DisplayFactory {
 
     public static Display standardDisplay() {
-        return null;
+        return new StandardDisplay();
     }
 
 }
