@@ -14,7 +14,7 @@ class PhysicalWithRiversDisplay extends PhysicalDisplay {
     @Override
     protected String asColoredString(Field field) {
         if (field.getTerrainType() == TerrainType.RIVER) {
-            return colorize("  ", Attribute.BACK_COLOR(0, 0, 255));
+            return colorize("  ", Attribute.BACK_COLOR(120, 140, 255));
         }
         return super.asColoredString(field);
     }
