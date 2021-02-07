@@ -19,7 +19,7 @@ class Main {
         WaterGenerator wg = new WaterGenerator();
         wg.generate(map);
 
-        DisplayFactory.standardDisplay().print(map);
+//        DisplayFactory.standardDisplay().print(map);
         TerrainGenerator tg = new TerrainGenerator();
         tg.generate(map);
 
