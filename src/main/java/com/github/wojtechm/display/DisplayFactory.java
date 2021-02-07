@@ -12,4 +12,8 @@ public class DisplayFactory {
     public static Display physicalDisplay() {
         return new PhysicalDisplay();
     }
+    public static Display physicalWithRiversDisplay() {
+        return new PhysicalWithRiversDisplay();
+    }
 }
+
