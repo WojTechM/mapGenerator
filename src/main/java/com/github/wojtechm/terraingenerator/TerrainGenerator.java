@@ -45,30 +45,35 @@ public class TerrainGenerator {
         for (int i = 0; i < FOREST_NUMBER; i++) {
             createSingleForest();
             forestFields.clear();
+            forestNeighbourFields.clear();
         }
     }
 
     private void createSingleForest() {
         Field startField = getStartPosition();
         addFirstForestField(startField);
-        while (forestIsToSmall())
+
+        int tries = 0;
+        while (forestIsToSmall() && ++tries < 500)
             plantForest();
     }
 
     private Field getStartPosition() {
         Field startField;
+
         int tries = 0;
         do {
             int startX = ThreadLocalRandom.current().nextInt(terrainMap.getWidth());
             int startY = ThreadLocalRandom.current().nextInt(terrainMap.getHeight());
 
             startField = terrainMap.fieldAtPosition(new Point(startX, startY)).get();
-        } while (isNotGrassland(startField) || ++tries > 500);
+        } while (!isGrassland(startField) && ++tries < 500);
+
         return startField;
     }
 
-    private boolean isNotGrassland(Field startField) {
-        return !(startField.getTerrainType() == TerrainType.GRASSLAND);
+    private boolean isGrassland(Field startField) {
+        return startField.getTerrainType() == TerrainType.GRASSLAND;
     }
 
     private void addFirstForestField(Field startField) {
@@ -91,7 +96,7 @@ public class TerrainGenerator {
                 if (ThreadLocalRandom.current().nextInt(10) > 8) {
                     Optional<Field> neighbourField = terrainMap.getNeighbourInDirection(direction, field);
                     neighbourField.ifPresent(actualFiled -> {
-                        if (actualFiled.getTerrainType().equals(TerrainType.GRASSLAND))
+                        if (isGrassland(actualFiled))
                             forestNeighbourFields.add(actualFiled);
                     });
                 }
@@ -147,7 +152,7 @@ public class TerrainGenerator {
         for (int y = 0; y < terrainMap.getHeight(); y++) {
             for (int x = 0; x < terrainMap.getWidth(); x++) {
                 Optional<Field> optionalField = terrainMap.fieldAtPosition(new Point(x, y));
-                if (optionalField.isPresent() && optionalField.get().getTerrainType() == TerrainType.GRASSLAND
+                if (optionalField.isPresent() && isGrassland(optionalField.get())
                         && isProperHeight(optionalField.get().getMetersAboveSeaLevel(), averageHeight)) {
                     potentialDeserts[y][x] = optionalField.get();
                 }
@@ -165,7 +170,7 @@ public class TerrainGenerator {
             for (int x = 0; x < terrainMap.getWidth(); x++) {
                 Optional<Field> optionalField = terrainMap.fieldAtPosition(new Point(x, y));
                 optionalField.ifPresent((field) -> {
-                    if (field.getMetersAboveSeaLevel() >= ICE_LEVEL && field.getTerrainType() == TerrainType.GRASSLAND)
+                    if (field.getMetersAboveSeaLevel() >= ICE_LEVEL && isGrassland(field))
                         field.setTerrainType(TerrainType.ICE);
                 });
             }
