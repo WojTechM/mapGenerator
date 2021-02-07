@@ -5,6 +5,7 @@ import com.github.wojtechm.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Wojciech Makieła
@@ -15,6 +16,10 @@ public class TerrainGenerator {
     private static final int ICE_LEVEL = 3000;
     private static final int DESERT_MAX_LEVEL_DIFF = 500;
     private static final int DESERT_MIN_AREA = 500;
+    private static final int FOREST_NUMBER = 50;
+    private static final int FOREST_MAX_SIZE = 50;
+    private static int FOREST_ACTUAL_SIZE = 5;
+
     private GeneratedMap terrainMap;
 
     public void generate(GeneratedMap map) {
@@ -38,7 +43,41 @@ public class TerrainGenerator {
     }
 
     private void fillWithForest() {
+        for (int i = 0; i < FOREST_NUMBER; i++) {
+            createSingleForest();
+        }
+    }
 
+    private void createSingleForest() {
+        int x;
+        int y;
+        do {
+            x = ThreadLocalRandom.current().nextInt(terrainMap.getWidth());
+            y = ThreadLocalRandom.current().nextInt(terrainMap.getHeight());
+        } while (!terrainMap.fieldAtPosition(new Point(x, y)).get().getTerrainType().equals(TerrainType.GRASSLAND));
+
+        Optional<Field> optionalField = terrainMap.fieldAtPosition(new Point(x, y));
+
+        int forestSize = 0;
+        optionalField.ifPresent(field -> spreadForest(field, forestSize));
+    }
+
+    private void spreadForest(Field field, int forestSize) {
+        for (Direction direction : Direction.values()) {
+            Optional<Field> neighbourField = terrainMap.getNeighbourInDirection(direction, field);
+            if (neighbourField.isEmpty() || forestSize == FOREST_MAX_SIZE) {
+                return;
+            }
+            Field aField = neighbourField.get();
+            if (aField.getTerrainType() == TerrainType.GRASSLAND) {
+                aField.setTerrainType(TerrainType.FOREST);
+                spreadForest(aField, forestSize);
+            }
+            else if (aField.getTerrainType() == TerrainType.RIVER || aField.getTerrainType() == TerrainType.LAKE) {
+                spreadForest(aField, forestSize);
+            }
+            forestSize++;
+        }
     }
 
     private void fillWithDesert() {
