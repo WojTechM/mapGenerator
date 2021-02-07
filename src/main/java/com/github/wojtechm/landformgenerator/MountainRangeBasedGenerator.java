@@ -3,7 +3,6 @@ package com.github.wojtechm.landformgenerator;
 import com.github.wojtechm.Field;
 import com.github.wojtechm.GeneratedMap;
 import com.github.wojtechm.Point;
-import com.github.wojtechm.display.DisplayFactory;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -20,16 +19,11 @@ public class MountainRangeBasedGenerator {
 
 
     public void generate(GeneratedMap map) {
-        for (int i = 0; i < 10; i++) {
-            generateDepressions(map);
-            smoothEntireMap(map);
-            generateMountains(map);
-            smoothEntireMap(map);
-        }
+        generateDepressions(map);
+        generateMountains(map);
         for (int i = 0; i < 3; i++) {
             smoothEntireMap(map);
         }
-        DisplayFactory.physicalDisplay().print(map);
     }
 
     private void smoothEntireMap(GeneratedMap map) {
@@ -40,28 +34,32 @@ public class MountainRangeBasedGenerator {
                 List<Field> allNeighbours = map.getAllNeighbours(field);
                 int height = (allNeighbours.stream().mapToInt(Field::getMetersAboveSeaLevel).sum()
                               + field.getMetersAboveSeaLevel())
-                             / (allNeighbours.size() + 1) + randomInRange(- 50, 50);
+                             / (allNeighbours.size() + 1) + randomInRange(- 300, 300);
                 field.setMetersAboveSeaLevel(height);
             }
         }
     }
 
     private void generateMountains(GeneratedMap map) {
-        Point randomStartPosition = getRandomStartingPoint(map);
-        addMountainAtPoint(randomStartPosition, map);
-        generateMountainRange(map.fieldAtPosition(randomStartPosition).get(), map);
+        for (int i = 0; i < Math.min(map.getHeight(), map.getWidth()) / 10; i++) {
+            Point randomStartPosition = getRandomStartingPoint(map);
+            addMountainAtPoint(randomStartPosition, map);
+            generateMountainRange(map.fieldAtPosition(randomStartPosition).get(), map);
+        }
     }
 
     private void generateDepressions(GeneratedMap map) {
-        Point randomStartPosition = getRandomStartingPoint(map);
-        addDepressionAtPoint(randomStartPosition, map);
-        generateDepressionRange(map.fieldAtPosition(randomStartPosition).get(), map);
+        for (int i = 0; i < Math.min(map.getHeight(), map.getWidth()) / 10; i++) {
+            Point randomStartPosition = getRandomStartingPoint(map);
+            addDepressionAtPoint(randomStartPosition, map);
+            generateDepressionRange(map.fieldAtPosition(randomStartPosition).get(), map);
+        }
     }
 
     private void generateMountainRange(Field startingPoint, GeneratedMap map) {
         Point vector = new Point(randomInRange(-5, 5), randomInRange(-5, 5));
         Point position = startingPoint.getPosition();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Math.min(map.getHeight(), map.getWidth()) / 2; i++) {
             position = offsetPointByVector(position, vector);
             if (map.fieldAtPosition(position).isEmpty()) break;
             addMountainAtPoint(position, map);
@@ -72,7 +70,7 @@ public class MountainRangeBasedGenerator {
     private void generateDepressionRange(Field field, GeneratedMap map) {
         Point vector = new Point(randBool() ? 1 : -1, randBool() ? 1 : -1);
         Point position = field.getPosition();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Math.min(map.getHeight(), map.getWidth()) / 2; i++) {
             position = offsetPointByVector(position, vector);
             if (map.fieldAtPosition(position).isEmpty()) break;
             addDepressionAtPoint(position, map);
@@ -130,7 +128,7 @@ public class MountainRangeBasedGenerator {
         float decreaseFactor = 0.85f;
         visited.add(startingPoint);
         int height = startingPoint.getMetersAboveSeaLevel();
-        int iterations = 10;
+        int iterations = Math.min(map.getHeight(), map.getWidth()) / 10;
         while (iterations > 0) {
             iterations--;
             height = (int) (height * decreaseFactor - 300);

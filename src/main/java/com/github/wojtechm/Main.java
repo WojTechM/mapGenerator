@@ -12,11 +12,10 @@ import com.github.wojtechm.watergenerator.WaterGenerator;
 class Main {
 
     public static void main(String[] args) {
-        GeneratedMap map = new GeneratedMap(130, 60); // TODO: take dimensions from args
-//        GeneratedMap map = new GeneratedMap(450, 165);
+        GeneratedMap map = new GeneratedMap(300, 180);
 
-        MountainRangeBasedGenerator lg = new MountainRangeBasedGenerator();
-        lg.generate(map);
+        MountainRangeBasedGenerator mountainRangeBasedGenerator = new MountainRangeBasedGenerator();
+        mountainRangeBasedGenerator.generate(map);
         DisplayFactory.physicalDisplay().print(map);
 
         WaterGenerator wg = new WaterGenerator();
