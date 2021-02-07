@@ -12,6 +12,8 @@ class StandardDisplay extends AbstractMapDisplay {
 
     protected String asColoredString(Field field) {
         switch (field.getTerrainType()) {
+            case ICE:
+                return colorize("  ", Attribute.WHITE_BACK());
             case RIVER:
                 return colorize("  ", Attribute.BLUE_BACK());
             case LAKE:
