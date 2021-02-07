@@ -16,10 +16,10 @@ class Main {
 
         MountainRangeBasedGenerator mountainRangeBasedGenerator = new MountainRangeBasedGenerator();
         mountainRangeBasedGenerator.generate(map);
-        DisplayFactory.physicalDisplay().print(map);
 
         WaterGenerator wg = new WaterGenerator();
         wg.generate(map);
+      
         TerrainGenerator tg = new TerrainGenerator();
         tg.generate(map);
 
