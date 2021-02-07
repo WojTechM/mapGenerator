@@ -12,9 +12,9 @@ import java.util.Optional;
  * @author Aleksander Jednaszewski
  */
 public class TerrainGenerator {
-    private final int ICE_LEVEL = 3000;
-    private final int DESERT_MAX_LEVEL_DIFF = 500;
-    private final int DESERT_MIN_AREA = 500;
+    private static final int ICE_LEVEL = 3000;
+    private static final int DESERT_MAX_LEVEL_DIFF = 500;
+    private static final int DESERT_MIN_AREA = 500;
     private GeneratedMap terrainMap;
 
     public void generate(GeneratedMap map) {
