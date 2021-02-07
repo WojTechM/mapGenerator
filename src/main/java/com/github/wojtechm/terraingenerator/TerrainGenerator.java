@@ -11,11 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Aleksander Jednaszewski
  */
 public class TerrainGenerator {
-    private static final int ICE_LEVEL = 3000;
+    private static final int ICE_LEVEL = 7000;
     private static final int DESERT_MAX_LEVEL_DIFF = 500;
     private static final int DESERT_MIN_AREA = 500;
     private static final int FOREST_NUMBER = 5;
-    private static final int FOREST_MAX_SIZE = 50;
+    private static final int FOREST_MAX_SIZE = 750;
     private final Set<Field> forestNeighbourFields = new HashSet<>();
     private final List<Field> forestFields = new ArrayList<>();
 
