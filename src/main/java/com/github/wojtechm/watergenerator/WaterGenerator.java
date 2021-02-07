@@ -4,9 +4,11 @@ import com.github.wojtechm.Field;
 import com.github.wojtechm.GeneratedMap;
 import com.github.wojtechm.Point;
 import com.github.wojtechm.TerrainType;
+import com.github.wojtechm.display.DisplayFactory;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.PriorityQueue;
 
 /**
@@ -42,7 +44,7 @@ public class WaterGenerator {
         PriorityQueue<Field> bestCandidatesForRiverSources = getBestSourceCandidates(numberOfRiversToGenerate);
         while (numberOfRiversToGenerate > 0) {
             Field field = bestCandidatesForRiverSources.poll();
-            field.setTerrainType(TerrainType.FOREST);
+            field.setTerrainType(TerrainType.RIVER);
             numberOfRiversToGenerate--;
             recursivelyCreateRiver(field, 100);
 
@@ -50,10 +52,15 @@ public class WaterGenerator {
     }
 
     private void recursivelyCreateRiver(Field field, int limit) {
+//        DisplayFactory.physicalWithRiversDisplay().print(map);
         if (limit <= 0) return;
-        Field nextRiverField = map.getAllNeighbours(field).stream()
+        Optional<Field> optionalNextRiverField = map.getAllNeighbours(field).stream()
                 .filter(field1 -> field1.getTerrainType() != TerrainType.RIVER)
-                .min(Comparator.comparingInt(Field::getMetersAboveSeaLevel)).get();
+                .min(Comparator.comparingInt(Field::getMetersAboveSeaLevel));
+
+        if (optionalNextRiverField.isEmpty()) return;
+        Field nextRiverField = optionalNextRiverField.get();
+
         if (nextRiverField.getTerrainType() == TerrainType.OCEAN) return;
         int newMASL = Math.min(field.getMetersAboveSeaLevel(), nextRiverField.getMetersAboveSeaLevel()) - 1;
         nextRiverField.setMetersAboveSeaLevel(newMASL);
@@ -99,6 +106,7 @@ public class WaterGenerator {
                     pq.add(field);
             }
         }
+
         if (riversToGenerate > pq.size()) {
             for (int x = 0; x < map.getWidth(); x++) {
                 Field field = map.fieldAtPosition(new Point(x, 0)).get();
