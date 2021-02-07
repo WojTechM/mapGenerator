@@ -28,8 +28,14 @@ public class GeneratedMap {
         }
     }
 
+    public GeneratedMap(Field[][] map) {
+        this.width = map[0].length;
+        this.height = map.length;
+        this.map = map;
+    }
+
     public Optional<Field> fieldAtPosition(Point point) {
-        if (isPointOutsideOfMapBorder(point)) {
+        if (isPointOutsideOfMapBorder(point) || map[point.Y][point.X] == null) {
             return Optional.empty();
         }
         return Optional.of(map[point.Y][point.X]);
@@ -57,5 +63,9 @@ public class GeneratedMap {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setFieldNull(Point point) {
+        map[point.Y][point.X] = null;
     }
 }
