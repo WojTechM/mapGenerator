@@ -90,11 +90,9 @@ public class TerrainGenerator {
             for (Direction direction : Direction.values()) {
                 if (ThreadLocalRandom.current().nextInt(10) > 8) {
                     Optional<Field> neighbourField = terrainMap.getNeighbourInDirection(direction, field);
-                    neighbourField.ifPresent(field1 ->
-                    {
-                        if (field.getTerrainType().equals(TerrainType.GRASSLAND)) {
-                        forestNeighbourFields.add(field);
-                    }
+                    neighbourField.ifPresent(actualFiled -> {
+                        if (actualFiled.getTerrainType().equals(TerrainType.GRASSLAND))
+                            forestNeighbourFields.add(actualFiled);
                     });
                 }
             }
