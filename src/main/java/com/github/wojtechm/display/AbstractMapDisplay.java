@@ -11,13 +11,15 @@ abstract class AbstractMapDisplay implements Display{
 
     @Override
     public void print(GeneratedMap map) {
+        StringBuilder sb = new StringBuilder();
         for (int y = map.getHeight() - 1; y >= 0; y--) {
-            System.out.println();
+            sb.append("\n");
             for (int x = 0; x < map.getWidth(); x++) {
                 Field field = map.fieldAtPosition(new Point(x, y)).get();
-                System.out.print(asColoredString(field));
+                sb.append(asColoredString(field));
             }
         }
+        System.out.println(sb.toString());
     }
 
     protected abstract String asColoredString(Field field);
