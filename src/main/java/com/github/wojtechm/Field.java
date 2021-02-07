@@ -9,7 +9,7 @@ public class Field {
     private final Point position;
 
     public Field(Point position) {
-        this.metersAboveSeaLevel = 0;
+        this.metersAboveSeaLevel = 200;
         this.terrainType = TerrainType.GRASSLAND;
         this.position = position;
     }

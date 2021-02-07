@@ -4,7 +4,6 @@ import com.github.wojtechm.Field;
 import com.github.wojtechm.GeneratedMap;
 import com.github.wojtechm.Point;
 import com.github.wojtechm.TerrainType;
-import com.github.wojtechm.display.DisplayFactory;
 
 import java.util.Comparator;
 import java.util.List;
@@ -52,7 +51,6 @@ public class WaterGenerator {
     }
 
     private void recursivelyCreateRiver(Field field, int limit) {
-//        DisplayFactory.physicalWithRiversDisplay().print(map);
         if (limit <= 0) return;
         Optional<Field> optionalNextRiverField = map.getAllNeighbours(field).stream()
                 .filter(field1 -> field1.getTerrainType() != TerrainType.RIVER)
@@ -65,7 +63,7 @@ public class WaterGenerator {
         int newMASL = Math.min(field.getMetersAboveSeaLevel(), nextRiverField.getMetersAboveSeaLevel()) - 1;
         nextRiverField.setMetersAboveSeaLevel(newMASL);
         nextRiverField.setTerrainType(TerrainType.RIVER);
-        recursivelyCreateRiver(nextRiverField,  limit - 1);
+        recursivelyCreateRiver(nextRiverField, limit - 1);
     }
 
     int getNumberOfRiversToGenerate() {
