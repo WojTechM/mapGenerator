@@ -1,8 +1,8 @@
 package com.github.wojtechm.display;
 
 import com.diogonunes.jcolor.Attribute;
-import com.github.wojtechm.Field;
-import com.github.wojtechm.TerrainType;
+import com.github.wojtechm.map.Field;
+import com.github.wojtechm.map.TerrainType;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 

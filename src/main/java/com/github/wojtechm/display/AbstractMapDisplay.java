@@ -1,8 +1,8 @@
 package com.github.wojtechm.display;
 
-import com.github.wojtechm.Field;
-import com.github.wojtechm.GeneratedMap;
-import com.github.wojtechm.Point;
+import com.github.wojtechm.map.Field;
+import com.github.wojtechm.map.GeneratedMap;
+import com.github.wojtechm.map.Point;
 
 /**
  * @author Wojciech Makieła

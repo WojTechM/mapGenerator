@@ -1,6 +1,6 @@
 package com.github.wojtechm.terraingenerator;
 
-import com.github.wojtechm.*;
+import com.github.wojtechm.map.*;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;

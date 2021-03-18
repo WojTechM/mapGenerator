@@ -1,8 +1,8 @@
 package com.github.wojtechm.landformgenerator;
 
-import com.github.wojtechm.Field;
-import com.github.wojtechm.GeneratedMap;
-import com.github.wojtechm.Point;
+import com.github.wojtechm.map.Field;
+import com.github.wojtechm.map.GeneratedMap;
+import com.github.wojtechm.map.Point;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author Wojciech Makieła
  */
-public class MountainRangeBasedGenerator {
+public class LandFormGenerator {
     private final int maxHeight = 10_000;
     private final int minHeight = -10_000;
 

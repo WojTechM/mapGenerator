@@ -1,11 +1,9 @@
 package com.github.wojtechm.display;
 
-import com.github.wojtechm.GeneratedMap;
-import com.github.wojtechm.Point;
-import com.github.wojtechm.TerrainType;
+import com.github.wojtechm.map.GeneratedMap;
+import com.github.wojtechm.map.Point;
+import com.github.wojtechm.map.TerrainType;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StandardDisplayTest {
 

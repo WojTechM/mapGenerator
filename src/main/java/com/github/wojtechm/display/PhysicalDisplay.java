@@ -1,7 +1,7 @@
 package com.github.wojtechm.display;
 
 import com.diogonunes.jcolor.Attribute;
-import com.github.wojtechm.Field;
+import com.github.wojtechm.map.Field;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 

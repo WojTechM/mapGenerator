@@ -1,9 +1,9 @@
 package com.github.wojtechm.watergenerator;
 
-import com.github.wojtechm.Field;
-import com.github.wojtechm.GeneratedMap;
-import com.github.wojtechm.Point;
-import com.github.wojtechm.TerrainType;
+import com.github.wojtechm.map.Field;
+import com.github.wojtechm.map.GeneratedMap;
+import com.github.wojtechm.map.Point;
+import com.github.wojtechm.map.TerrainType;
 
 import java.util.Comparator;
 import java.util.List;

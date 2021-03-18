@@ -1,6 +1,6 @@
 package com.github.wojtechm.display;
 
-import com.github.wojtechm.GeneratedMap;
+import com.github.wojtechm.map.GeneratedMap;
 
 /**
  * @author Wojciech Makieła

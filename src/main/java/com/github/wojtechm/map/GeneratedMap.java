@@ -1,4 +1,4 @@
-package com.github.wojtechm;
+package com.github.wojtechm.map;
 
 import java.util.Arrays;
 import java.util.List;
